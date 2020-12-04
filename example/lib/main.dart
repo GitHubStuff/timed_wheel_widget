@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Widget demo'),
+      home: MyHomePage(title: 'TimedWheelWidget demo'),
     );
   }
 }
@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Duration duration = Duration(seconds: 10);
+  Duration duration = Duration(seconds: 5);
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            _text(
               'Push button for animated wheel',
             ),
-            TimedWheelWidget(
-              callback: (pct, dur) {
-                debugPrint('$pct');
-              },
-              completion: null,
-              duration: duration,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TimedWheelWidget(
+                callback: (pct, dur) {
+                  debugPrint('$dur $pct');
+                },
+                completion: () {
+                  debugPrint('Done');
+                },
+                duration: duration,
+              ),
             ),
+            _text('Duration in seconds: ${duration.inSeconds}'),
           ],
         ),
       ),
@@ -68,5 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget _text(String caption) {
+    return Text(caption, style: TextStyle(fontSize: 24.0));
   }
 }

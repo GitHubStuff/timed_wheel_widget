@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 
 part 'timed_widget_state.dart';
 
+/// Classes for the cubit state
 class TimedWidgetInitial extends TimedWidgetState {
   const TimedWidgetInitial() : super(TimedWidgetBuilderState.TimedWidgetInitial);
 }

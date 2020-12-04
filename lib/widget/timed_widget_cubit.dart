@@ -3,12 +3,15 @@
 // found in the LICENSE file.
 
 import 'package:bloc/bloc.dart';
+
 import 'timed_widget_states.dart';
 
 class TimedWidgetCubit extends Cubit<TimedWidgetState> {
+  bool _cancelUpdates;
+
   TimedWidgetCubit() : super(TimedWidgetInitial());
 
-  bool _cancelUpdates;
+  void cancelTimerUpdates() async => _cancelUpdates = true;
 
   void updatingTimer(Duration duration) async {
     _cancelUpdates = false;
@@ -24,6 +27,4 @@ class TimedWidgetCubit extends Cubit<TimedWidgetState> {
     }
     emit(UpdateComplete());
   }
-
-  void cancelTimerUpdates() async => _cancelUpdates = true;
 }

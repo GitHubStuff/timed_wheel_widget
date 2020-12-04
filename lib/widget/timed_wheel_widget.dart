@@ -2,16 +2,23 @@
 // Uses of this source code is governed by 'The Unlicense' that can be
 // found in the LICENSE file.
 
-import 'timed_widget_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'timed_widget_cubit.dart';
 import 'timed_widget_states.dart';
 
 class TimedWheelWidget extends StatefulWidget {
   final Duration duration;
   final Function(double, Duration) callback;
   final Function completion;
-  const TimedWheelWidget({@required this.duration, @required this.callback, @required this.completion});
+  const TimedWheelWidget({
+    Key key,
+    @required this.duration,
+    this.callback,
+    this.completion,
+  })  : assert(duration != null),
+        super(key: key);
   @override
   _TimedWheelWidget createState() => _TimedWheelWidget();
 }
@@ -19,7 +26,7 @@ class TimedWheelWidget extends StatefulWidget {
 class _TimedWheelWidget extends State<TimedWheelWidget> {
   TimedWidgetCubit _timedWidgetCubit;
   double _value = 0.5;
-  
+
   @override
   Widget build(BuildContext context) {
     _timedWidgetCubit = TimedWidgetCubit();
@@ -39,7 +46,6 @@ class _TimedWheelWidget extends State<TimedWheelWidget> {
               _value = info.pct;
               if (widget.callback != null) widget.callback(_value, info.duration);
           }
-
           return CircularProgressIndicator(value: _value);
         });
   }

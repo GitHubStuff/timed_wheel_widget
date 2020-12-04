@@ -1,16 +1,33 @@
-# example
+# timed\_wheel\_widget
 
-A new Flutter project.
+Shows a CircularProgressIndicator as count-down/up ring for a given duration.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```dart
+class TimedWheelWidget extends StatefulWidget {
+  final Duration duration;
+  final Function(double, Duration) callback;
+  final Function completion;
+  const TimedWheelWidget({
+    Key key,
+    @required this.duration,
+    this.callback,
+    this.completion,
+  })  : assert(duration != null),
+        super(key: key);
+```
 
-A few resources to get you started if this is your first Flutter project:
+NOTE: If **duration** is negative it counts down, other wise counts up
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+NOTE: **callback** is optional, it can return percentage complated and remaining duration
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+NOTE: **complete** is optional, it returns when the drawing completes (aka duration is over)
+
+### Example
+
+```dart
+timed_wheel_widget/example/main.dart
+```
+
+Details the widget usage.
