@@ -31,7 +31,7 @@ class _TimedWheelWidget extends State<TimedWheelWidget> {
   Widget build(BuildContext context) {
     _timedWidgetCubit = TimedWidgetCubit();
     return BlocBuilder<TimedWidgetCubit, TimedWidgetState>(
-        cubit: _timedWidgetCubit,
+        bloc: _timedWidgetCubit,
         builder: (context, sensorState) {
           switch (sensorState.timedWidgetBuilderState) {
             case TimedWidgetBuilderState.TimedWidgetInitial:

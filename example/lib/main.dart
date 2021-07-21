@@ -33,7 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Duration duration = Duration(seconds: 5);
+  Duration _positiveDuration = Duration(minutes: 2);
+  Duration _negativeDuration = Duration(minutes: -2);
 
   @override
   Widget build(BuildContext context) {
@@ -52,24 +53,52 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(16.0),
               child: TimedWheelWidget(
                 callback: (pct, dur) {
-                  debugPrint('$dur $pct');
+                  debugPrint('Positive $dur $pct');
                 },
                 completion: () {
-                  debugPrint('Done');
+                  debugPrint('PosDone');
                 },
-                duration: duration,
+                duration: _positiveDuration,
               ),
             ),
-            _text('Duration in seconds: ${duration.inSeconds}'),
+            _text('Positive Duration in seconds: ${_positiveDuration.inSeconds}'),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                SizedBox(
+                  height: 150.0,
+                  width: 150.0,
+                  child: TimedWheelWidget(
+                    callback: (pct, dur) {
+                      debugPrint('Negative $dur $pct');
+                    },
+                    completion: () {
+                      debugPrint('NegDone');
+                    },
+                    duration: _negativeDuration,
+                  ),
+                ),
+                SizedBox(
+                  height: 130.0,
+                  width: 130.0,
+                  child: TimedWheelWidget(
+                    callback: (pct, dur) {
+                      debugPrint('Negative $dur $pct');
+                    },
+                    completion: () {
+                      debugPrint('NegDone');
+                    },
+                    duration: _positiveDuration,
+                  ),
+                ),
+              ],
+            ),
+            _text('Negative Duration in seconds: ${_negativeDuration.inSeconds}'),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            duration = (duration.isNegative) ? Duration(seconds: 2) : Duration(seconds: -3);
-          });
-        },
+        onPressed: () {},
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

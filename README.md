@@ -31,3 +31,7 @@ timed_wheel_widget/example/main.dart
 ```
 
 Details the widget usage.
+
+## Final thoughts
+
+Be kind to each other.
